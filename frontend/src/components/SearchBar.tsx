@@ -7,6 +7,7 @@ import type { SearchFilters } from '../types';
 
 interface SearchBarProps {
   onSearch: (filters: SearchFilters) => void;
+  initialFilters?: SearchFilters;
 }
 
 // Real location data from mock listings
@@ -21,12 +22,12 @@ const LOCATIONS = [
   { city: 'Scottsdale', state: 'Arizona', country: 'United States' },
 ];
 
-const SearchBar = ({ onSearch }: SearchBarProps) => {
-  const [location, setLocation] = useState('');
+const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
+  const [location, setLocation] = useState(initialFilters?.city || '');
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState(LOCATIONS);
-  const [checkIn, setCheckIn] = useState<Date | null>(null);
-  const [checkOut, setCheckOut] = useState<Date | null>(null);
+  const [checkIn, setCheckIn] = useState<Date | null>(initialFilters?.checkIn || null);
+  const [checkOut, setCheckOut] = useState<Date | null>(initialFilters?.checkOut || null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);

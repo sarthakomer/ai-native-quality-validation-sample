@@ -80,7 +80,7 @@ const Home = () => {
           <p className="text-center text-gray-600 mb-8">
             Search deals on hotels, homes, and much more...
           </p>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar onSearch={handleSearch} initialFilters={searchFilters} />
         </div>
       </div>
 
@@ -112,6 +112,50 @@ const Home = () => {
 
       {/* Listings Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Search Summary */}
+        {(searchFilters.city || searchFilters.checkIn || searchFilters.guests) && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-airbnb-red/10 to-red-50 rounded-lg border-l-4 border-airbnb-red">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {data?.pagination.total || 0} {data?.pagination.total === 1 ? 'property' : 'properties'} found
+                  {searchFilters.city && ` in ${searchFilters.city}`}
+                </h3>
+                <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+                  {searchFilters.city && (
+                    <span className="inline-flex items-center px-3 py-1 bg-white rounded-full border border-gray-200">
+                      <span className="mr-1">📍</span>
+                      {searchFilters.city}
+                    </span>
+                  )}
+                  {searchFilters.checkIn && searchFilters.checkOut && (
+                    <span className="inline-flex items-center px-3 py-1 bg-white rounded-full border border-gray-200">
+                      <span className="mr-1">📅</span>
+                      {searchFilters.checkIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - {searchFilters.checkOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    </span>
+                  )}
+                  {searchFilters.guests && (
+                    <span className="inline-flex items-center px-3 py-1 bg-white rounded-full border border-gray-200">
+                      <span className="mr-1">👥</span>
+                      {searchFilters.guests} {searchFilters.guests === 1 ? 'guest' : 'guests'}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setSearchFilters({});
+                  setActiveCategory('All');
+                  setCurrentPage(1);
+                }}
+                className="text-sm font-medium text-airbnb-red hover:text-red-700 underline whitespace-nowrap ml-4"
+              >
+                Clear search
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-semibold text-gray-900">
             {activeCategory === 'All' ? 'Explore stays' : `${activeCategory} properties`}
