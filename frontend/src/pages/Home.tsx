@@ -6,7 +6,7 @@ import { listingService } from '../services/listingService';
 import type { Listing, SearchFilters } from '../types';
 
 const categories = [
-  { name: 'All', filter: {} },
+  { name: 'All', icon: '🏠', filter: {} },
   { name: 'Beachfront', icon: '🏖️', filter: { amenities: 'Beach Access' } },
   { name: 'Cabins', icon: '🏕️', filter: { propertyType: 'Cabin' } },
   { name: 'Villas', icon: '🏰', filter: { propertyType: 'Villa' } },
@@ -19,23 +19,32 @@ const categories = [
 const Home = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchFilters, setSearchFilters] = useState<SearchFilters>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['listings', searchFilters, activeCategory],
+    queryKey: ['listings', searchFilters, activeCategory, currentPage],
     queryFn: () => {
       const category = categories.find(c => c.name === activeCategory);
       const combinedFilters = { ...searchFilters, ...category?.filter };
-      return listingService.getAllListings(combinedFilters, 1, 20);
+      return listingService.getAllListings(combinedFilters, currentPage, itemsPerPage);
     },
   });
 
   const handleCategoryClick = (categoryName: string) => {
     setActiveCategory(categoryName);
+    setCurrentPage(1); // Reset to first page when changing category
   };
 
   const handleSearch = (filters: SearchFilters) => {
     setSearchFilters(filters);
     setActiveCategory('All');
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (isLoading) {
@@ -108,7 +117,12 @@ const Home = () => {
             {activeCategory === 'All' ? 'Explore stays' : `${activeCategory} properties`}
           </h2>
           <p className="text-sm text-gray-600">
-            {data?.listings.length || 0} {data?.listings.length === 1 ? 'property' : 'properties'} found
+            {data?.pagination.total || 0} total {data?.pagination.total === 1 ? 'property' : 'properties'}
+            {data?.pagination.total > itemsPerPage && (
+              <span className="ml-2">
+                (Page {currentPage} of {data?.pagination.pages})
+              </span>
+            )}
           </p>
         </div>
 
@@ -126,10 +140,48 @@ const Home = () => {
               onClick={() => {
                 setActiveCategory('All');
                 setSearchFilters({});
+                setCurrentPage(1);
               }}
               className="mt-4 px-6 py-2 bg-airbnb-red text-white rounded-lg hover:bg-red-600 transition"
             >
               Clear filters
+            </button>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {data && data.pagination.pages > 1 && (
+          <div className="mt-12 flex justify-center items-center space-x-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              Previous
+            </button>
+
+            <div className="flex space-x-1">
+              {Array.from({ length: data.pagination.pages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`px-4 py-2 rounded-lg transition ${
+                    currentPage === page
+                      ? 'bg-airbnb-red text-white'
+                      : 'border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === data.pagination.pages}
+              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              Next
             </button>
           </div>
         )}
