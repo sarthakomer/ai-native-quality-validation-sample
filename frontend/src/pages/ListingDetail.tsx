@@ -31,7 +31,7 @@ const ListingDetail = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
 
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [, setSelectedImage] = useState(0);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [guests, setGuests] = useState(1);

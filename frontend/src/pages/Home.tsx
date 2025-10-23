@@ -7,13 +7,13 @@ import type { Listing, SearchFilters } from '../types';
 
 const categories = [
   { name: 'All', filter: {} },
-  { name: 'Beachfront', icon: '🏖️', filter: { amenities: 'Beach Access' } },
+  { name: 'Beachfront', icon: '🏖️', filter: { amenities: ['Beach Access'] } },
   { name: 'Cabins', icon: '🏕️', filter: { propertyType: 'Cabin' } },
   { name: 'Villas', icon: '🏰', filter: { propertyType: 'Villa' } },
   { name: 'Apartments', icon: '🏢', filter: { propertyType: 'Apartment' } },
   { name: 'Luxury', icon: '💎', filter: { minPrice: 500 } },
   { name: 'Budget', icon: '💰', filter: { maxPrice: 300 } },
-  { name: 'Mountain', icon: '⛰️', filter: { amenities: 'Mountain View' } },
+  { name: 'Mountain', icon: '⛰️', filter: { amenities: ['Mountain View'] } },
 ];
 
 const Home = () => {
