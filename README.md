@@ -78,7 +78,7 @@ Pre-defined category filters:
 
 ### Mock Data
 
-The application includes 28 diverse properties:
+The application includes 38 diverse properties:
 - 8 cities: Malibu, Brooklyn, Austin, Aspen, Miami Beach, San Francisco, Honolulu, Scottsdale
 - Price range: $120 - $2200 per night
 - Property types: Villa, Apartment, Cabin, House, Loft, Condo, Penthouse
@@ -128,76 +128,10 @@ DELETE /api/bookings/:id          # Cancel booking (auth required)
 ?limit=20                # Results per page
 ```
 
-## 🎨 Customization
 
-### Adding New Properties
 
-Edit `backend/src/data/mockData.ts` to add more properties:
 
-```typescript
-{
-  _id: 'unique-id',
-  title: 'Property Title',
-  description: 'Property Description',
-  propertyType: 'Villa',
-  price: 500,
-  location: {
-    city: 'City Name',
-    state: 'State',
-    country: 'Country',
-    // ... more location details
-  },
-  amenities: ['WiFi', 'Pool'],
-  images: ['url1', 'url2'],
-  bedrooms: 3,
-  bathrooms: 2,
-  maxGuests: 6,
-  // ... more fields
-}
-```
 
-### Modifying Filters
 
-Edit `frontend/src/pages/Home.tsx` to customize category filters:
 
-```typescript
-const categories = [
-  { name: 'Your Category', icon: '🏠', filter: { propertyType: 'Villa' } },
-  // Add more categories
-];
-```
 
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Design inspiration from [Airbnb](https://www.airbnb.com)
-- Images from [Unsplash](https://unsplash.com)
-- Icons from [React Icons](https://react-icons.github.io/react-icons/)
-
-## 📞 Support
-
-For support, email support@lambdatest.com or open an issue in the GitHub repository.
-
-## 🔗 Links
-
-- [LambdaTest Website](https://www.lambdatest.com)
-- [Documentation](https://github.com/LambdaTest/airbnb-clone/wiki)
-- [Issues](https://github.com/LambdaTest/airbnb-clone/issues)
-
----
-
-**Made with ❤️ by LambdaTest**
->>>>>>> 40c81aa (Initial commit)
