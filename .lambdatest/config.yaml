@@ -9,7 +9,7 @@ assignee: 1732948
 environment_id: 155572
 
 # Test URL for automation
-test_url: "https://a3e5e7413269.ngrok-free.app/"
+test_url: "http://20.55.62.113:3000/"
 
 # Enable test duplication for reliability
 # use_duplication: true
