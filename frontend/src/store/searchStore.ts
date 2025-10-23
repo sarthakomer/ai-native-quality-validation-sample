@@ -16,7 +16,6 @@ const initialFilters: SearchFilters = {
   maxPrice: undefined,
   guests: undefined,
   bedrooms: undefined,
-  beds: undefined,
   bathrooms: undefined,
   amenities: [],
   checkIn: undefined,

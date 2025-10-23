@@ -10,9 +10,79 @@ env:
   DEPLOY_PATH: /home/${{ secrets.AZURE_VM_USERNAME }}/Github-App-Demo
 
 jobs:
-  deploy:
-    name: Deploy PR to Azure VM
+  # Job 1: Build and test backend
+  build-backend:
+    name: Build Backend
     runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Type check backend
+        working-directory: backend
+        run: npx tsc --noEmit
+
+      - name: Build backend
+        working-directory: backend
+        run: npm run build
+
+      - name: Backend build summary
+        if: success()
+        run: echo "✅ Backend build successful!"
+
+  # Job 2: Build and test frontend
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm install --legacy-peer-deps
+
+      - name: Type check frontend
+        working-directory: frontend
+        run: npx tsc -b
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Frontend build summary
+        if: success()
+        run: echo "✅ Frontend build successful!"
+
+  # Job 3: Deploy
+  deploy:
+    name: Deploy 
+    runs-on: ubuntu-latest
+    # needs: [build-backend, build-frontend]
     
     steps:
       - name: Checkout PR code
@@ -40,7 +110,7 @@ jobs:
           ssh -i ~/.ssh/azure_vm_key \
             -p ${{ secrets.AZURE_VM_PORT || 22 }} \
             ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }} \
-            "mkdir -p $DEPLOY_PATH"
+            "mkdir -p /home/${{ secrets.AZURE_VM_USERNAME }}/Github-App-Demo"
 
       - name: Sync PR code to Azure VM
         run: |
@@ -53,15 +123,15 @@ jobs:
             --exclude='.env' \
             --exclude='.DS_Store' \
             --exclude='*.log' \
-            ./ ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }}:$DEPLOY_PATH/
+            ./ ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }}:/home/${{ secrets.AZURE_VM_USERNAME }}/Github-App-Demo/
 
       - name: Deploy PR application
         run: |
           ssh -i ~/.ssh/azure_vm_key \
             -p ${{ secrets.AZURE_VM_PORT || 22 }} \
-            ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }} << 'ENDSSH'
+            ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }} << EOF
           set -e
-          cd $DEPLOY_PATH
+          cd /home/${{ secrets.AZURE_VM_USERNAME }}/Github-App-Demo
           
           echo "📦 Stopping existing containers..."
           docker-compose down || true
@@ -74,15 +144,15 @@ jobs:
           
           echo "✅ PR Deployment complete!"
           docker-compose ps
-          ENDSSH
+          EOF
 
       - name: Verify deployment
         run: |
           ssh -i ~/.ssh/azure_vm_key \
             -p ${{ secrets.AZURE_VM_PORT || 22 }} \
-            ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }} << 'ENDSSH'
+            ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_HOST }} << EOF
           set -e
-          cd $DEPLOY_PATH
+          cd /home/${{ secrets.AZURE_VM_USERNAME }}/Github-App-Demo
           
           echo "🔍 Checking backend health..."
           for i in {1..30}; do
@@ -90,7 +160,7 @@ jobs:
               echo "✅ Backend is healthy!"
               break
             fi
-            if [ $i -eq 30 ]; then
+            if [ \$i -eq 30 ]; then
               echo "❌ Backend health check failed"
               docker-compose logs backend
               exit 1
@@ -104,7 +174,7 @@ jobs:
           else
             echo "⚠️  Frontend might need more time to start"
           fi
-          ENDSSH
+          EOF
 
       - name: Cleanup SSH key
         if: always()

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaSearch, FaBars, FaUserCircle, FaGlobe } from 'react-icons/fa';
+import { FaBars, FaUserCircle, FaGlobe } from 'react-icons/fa';
 import { useAuthStore } from '../store/authStore';
 
 const Header = () => {

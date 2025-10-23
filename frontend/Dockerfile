@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with legacy peer deps (for React 19 compatibility)
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .
@@ -66,22 +66,13 @@ EOF
 # Copy built app from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Create non-root user
-RUN addgroup -g 1001 -S nginx && \
-    adduser -S nginx -u 1001 -G nginx
-
-# Change ownership
+# nginx:alpine already has nginx user/group, just set ownership
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
-    chown -R nginx:nginx /etc/nginx/conf.d
-
-# Create nginx pid directory
-RUN touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /etc/nginx/conf.d && \
+    touch /var/run/nginx.pid && \
     chown -R nginx:nginx /var/run/nginx.pid
-
-# Switch to non-root user
-USER nginx
 
 # Expose port
 EXPOSE 80
