@@ -50,7 +50,7 @@ const AVAILABLE_AMENITIES = [
 
 const BecomeHost = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<ListingFormData>({
     title: '',
