@@ -27,7 +27,7 @@ const Home = () => {
     queryFn: () => {
       const category = categories.find(c => c.name === activeCategory);
       const combinedFilters = { ...searchFilters, ...category?.filter };
-      return listingService.getAllListings(combinedFilters, currentPage, itemsPerPage);
+      return listingService.getAllListings(combinedFilters as SearchFilters, currentPage, itemsPerPage);
     },
   });
 
@@ -118,7 +118,7 @@ const Home = () => {
           </h2>
           <p className="text-sm text-gray-600">
             {data?.pagination.total || 0} total {data?.pagination.total === 1 ? 'property' : 'properties'}
-            {data?.pagination.total > itemsPerPage && (
+            {data?.pagination.total && data?.pagination.total > itemsPerPage && (
               <span className="ml-2">
                 (Page {currentPage} of {data?.pagination.pages})
               </span>
