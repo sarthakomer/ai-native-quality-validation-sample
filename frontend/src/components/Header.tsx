@@ -32,9 +32,12 @@ const Header = () => {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
-            <button className="hidden md:block text-sm font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-full">
+            <Link
+              to="/become-host"
+              className="hidden md:block text-sm font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-full"
+            >
               Become a Host
-            </button>
+            </Link>
 
             <button className="hidden md:block p-3 hover:bg-gray-100 rounded-full">
               <FaGlobe className="text-gray-700" />
