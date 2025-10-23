@@ -210,36 +210,36 @@ const BecomeHost = () => {
 
         {/* Progress Bar */}
         <div className="mb-12">
-          <div className="flex items-center justify-between">
-            {[1, 2, 3, 4, 5].map((step) => (
-              <div key={step} className="flex-1">
-                <div className="flex items-center">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      step <= currentStep
-                        ? 'bg-airbnb-red text-white'
-                        : 'bg-gray-300 text-gray-600'
-                    }`}
-                  >
-                    {step < currentStep ? <FaCheck /> : step}
+          <div className="flex items-start justify-between">
+            {[1, 2, 3, 4, 5].map((step, index) => {
+              const labels = ['Property', 'Location', 'Details', 'Amenities', 'Photos'];
+              return (
+                <div key={step} className="flex items-center" style={{ flex: step === 5 ? '0 0 auto' : '1' }}>
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        step <= currentStep
+                          ? 'bg-airbnb-red text-white'
+                          : 'bg-gray-300 text-gray-600'
+                      }`}
+                    >
+                      {step < currentStep ? <FaCheck /> : step}
+                    </div>
+                    <span className="mt-2 text-xs text-gray-600 text-center whitespace-nowrap">
+                      {labels[index]}
+                    </span>
                   </div>
                   {step < 5 && (
                     <div
-                      className={`flex-1 h-1 mx-2 ${
+                      className={`h-1 mx-2 -mt-3 ${
                         step < currentStep ? 'bg-airbnb-red' : 'bg-gray-300'
                       }`}
+                      style={{ flex: '1', minWidth: '40px' }}
                     />
                   )}
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-2 text-xs text-gray-600">
-            <span>Property</span>
-            <span>Location</span>
-            <span>Details</span>
-            <span>Amenities</span>
-            <span>Photos</span>
+              );
+            })}
           </div>
         </div>
 
