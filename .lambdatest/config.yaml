@@ -6,7 +6,7 @@ folder_id: "01K88GFKKP1TDP3AYBP725BW7C"
 
 # Test Run configuration
 assignee: 1732948
-environment_id: 156450
+environment_id: 155636
 
 # Test URL for automation
 test_url: "https://demo.lambdatestinternal.com/"
