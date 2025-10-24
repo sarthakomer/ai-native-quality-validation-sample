@@ -9,7 +9,7 @@ assignee: 1732948
 environment_id: 155572
 
 # Test URL for automation
-test_url: "http://20.55.62.113:3000/"
+test_url: "https://demo.lambdatestinternal.com/"
 
 # Enable test duplication for reliability
 use_duplication: true

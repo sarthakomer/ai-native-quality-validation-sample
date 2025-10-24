@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaBars, FaUserCircle, FaGlobe } from 'react-icons/fa';
+import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { useAuthStore } from '../store/authStore';
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
             >
               <path d="M16 1c2 0 3.46 1.5 3.46 3.8 0 2.6-2.5 6-3.46 7.3-.96-1.3-3.46-4.7-3.46-7.3C12.54 2.5 14 1 16 1zm0 14.5c4.5 0 8.5 1.5 11.5 4C29 21 30 23 30 25.5c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5 0-2.5 1-4.5 2.5-6 3-2.5 7-4 11.5-4z" />
             </svg>
-            <span className="ml-2 text-xl font-bold text-airbnb-red">airbnb</span>
+            <span className="ml-2 text-xl font-bold text-airbnb-red">Github Demo</span>
           </Link>
 
           {/* User Menu */}
@@ -39,9 +39,6 @@ const Header = () => {
               Become a Host
             </Link>
 
-            <button className="hidden md:block p-3 hover:bg-gray-100 rounded-full">
-              <FaGlobe className="text-gray-700" />
-            </button>
 
             <div className="relative">
               <button
@@ -105,7 +102,7 @@ const Header = () => {
                       </Link>
                       <Link
                         to="/register"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold"
                         onClick={() => setShowUserMenu(false)}
                       >
                         Sign up
