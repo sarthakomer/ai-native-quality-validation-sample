@@ -63,12 +63,12 @@ password123
 ## Quick Test Scenarios
 
 ### Scenario 1: Login as Admin and View Listings
-1. Go to: http://localhost:5174/login
+1. Go to: https://demo.lambdatestinternal.com/login
 2. Use: `lambdatestadmin@email.com` / `password123`
 3. Browse all platform features with admin access
 
 ### Scenario 2: Create a New Listing (Become a Host)
-1. Go to: http://localhost:5174/login
+1. Go to: https://demo.lambdatestinternal.com/login
 2. Use: `james.wilson@email.com` / `password123`
 3. Click "Become a Host" in the header
 4. Fill out the 5-step form:
@@ -80,13 +80,13 @@ password123
 5. Submit to create your listing
 
 ### Scenario 3: Browse as Guest
-1. Go to: http://localhost:5174/login
+1. Go to: https://demo.lambdatestinternal.com/login
 2. Use: `emma.davis@email.com` / `password123`
 3. Browse listings and search by location/filters
 4. View property details
 
 ### Scenario 4: Register New Account
-1. Go to: http://localhost:5174/register
+1. Go to: https://demo.lambdatestinternal.com/register
 2. Fill in your details
 3. Create a new account
 4. You can immediately become a host after registration
@@ -123,7 +123,7 @@ Use any of the demo credentials above. We recommend using a host account like:
 
 ### Step 2: Access the Page
 - Click "Become a Host" button in the header
-- You'll be redirected to: http://localhost:5174/become-host
+- You'll be redirected to: https://demo.lambdatestinternal.com/become-host
 
 ### Step 3: Complete the Form
 
@@ -170,19 +170,11 @@ Click "Create Listing" to add your property to the platform!
 
 ### Issue: "Failed to load listings"
 **Solutions:**
-1. Check if backend is running on port 5000
-2. Check if frontend is running on port 5174
-3. Hard refresh the browser (Cmd+Shift+R or Ctrl+Shift+R)
-4. Clear browser cache and reload
-5. Check browser console for CORS errors
-6. Restart both servers:
-   ```bash
-   # In backend directory
-   npm run dev
-
-   # In frontend directory (separate terminal)
-   npm run dev
-   ```
+1. Check if backend server is running
+2. Hard refresh the browser (Cmd+Shift+R or Ctrl+Shift+R)
+3. Clear browser cache and reload
+4. Check browser console for CORS errors
+5. Contact support if the issue persists
 
 ### Issue: Cannot create listing
 **Solutions:**
@@ -194,14 +186,14 @@ Click "Create Listing" to add your property to the platform!
 ### Issue: Login not working
 **Solutions:**
 1. Use exact email and password: `password123`
-2. Check if backend is running
-3. Clear browser localStorage and try again
+2. Clear browser localStorage and try again
+3. Contact support if the issue persists
 
 ---
 
 ## Current Application Status
 
-- **Frontend**: Running on http://localhost:5174/
+- **Frontend**: Running on https://demo.lambdatestinternal.com/
 - **Backend**: Running on http://localhost:5000/
 - **Mode**: Mock Data (No MongoDB required)
 - **Total Listings**: 28 properties
@@ -219,7 +211,7 @@ Click "Create Listing" to add your property to the platform!
 
 4. **Authentication**: JWT tokens are stored in localStorage and valid until logout.
 
-5. **CORS**: CORS is configured to accept requests from localhost:5174 (frontend).
+5. **CORS**: CORS is configured to accept requests from the frontend domain.
 
 ---
 
