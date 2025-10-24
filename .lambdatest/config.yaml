@@ -12,5 +12,5 @@ environment_id: 155636
 test_url: "https://demo.lambdatestinternal.com/"
 
 # Enable test duplication for reliability
-# use_duplication: true
-# template_test_run_id: "01K8953PEH0M4R7KQKXSSM66PM"
+use_duplication: false
+template_test_run_id: "01K8953PEH0M4R7KQKXSSM66PM"

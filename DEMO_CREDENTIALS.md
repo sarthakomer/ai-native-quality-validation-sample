@@ -30,35 +30,42 @@ password123
 - **Bio**: LambdaTest developer and property host.
 - **Properties**: Full access to platform features
 
-### 3. Sarah Johnson (Host)
+### 3. Demo User (Host)
+- **Email**: `demo@lambdatest.com`
+- **Password**: `password123`
+- **Role**: Host
+- **Bio**: Demo account for testing purposes.
+- **Properties**: Full access to platform features
+
+### 4. Sarah Johnson (Host)
 - **Email**: `sarah.johnson@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Travel enthusiast and photography lover. Host since 2019.
 - **Properties**: Owns 5 listings including Malibu villas and Waikiki condos
 
-### 4. Michael Chen (Host)
+### 5. Michael Chen (Host)
 - **Email**: `michael.chen@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Architect and real estate investor. Passionate about unique spaces.
 - **Properties**: Owns properties in Brooklyn and San Francisco
 
-### 5. Emma Davis (Guest)
+### 6. Emma Davis (Guest)
 - **Email**: `emma.davis@email.com`
 - **Password**: `password123`
 - **Role**: Guest (Not a host)
 - **Bio**: Digital nomad exploring the world one city at a time.
 - **Properties**: None (guest account only)
 
-### 6. James Wilson (Host)
+### 7. James Wilson (Host)
 - **Email**: `james.wilson@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Experienced host with 50+ properties worldwide.
 - **Properties**: Owns multiple listings in Austin, Miami, and Scottsdale
 
-### 7. Olivia Brown (Guest)
+### 8. Olivia Brown (Guest)
 - **Email**: `olivia.brown@email.com`
 - **Password**: `password123`
 - **Role**: Guest (Not a host)
@@ -204,7 +211,7 @@ Click "Create Listing" to add your property to the platform!
 - **Backend**: Running on http://localhost:5000/
 - **Mode**: Mock Data (No MongoDB required)
 - **Total Listings**: 28 properties
-- **Total Users**: 7 demo users
+- **Total Users**: 8 demo users
 
 ---
 
