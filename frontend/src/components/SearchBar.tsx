@@ -390,9 +390,6 @@ const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
                 <div className="flex items-center justify-between py-4">
                   <div>
                     <p className="text-sm font-semibold text-gray-900">Pets</p>
-                    <p className="text-xs text-gray-500 underline cursor-pointer">
-                      Bringing a service animal?
-                    </p>
                   </div>
                   <div className="flex items-center space-x-3">
                     <button
