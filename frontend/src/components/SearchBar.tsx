@@ -20,6 +20,10 @@ const LOCATIONS = [
   { city: 'San Francisco', state: 'California', country: 'United States' },
   { city: 'Honolulu', state: 'Hawaii', country: 'United States' },
   { city: 'Scottsdale', state: 'Arizona', country: 'United States' },
+  { city: 'Las Vegas', state: 'Nevada', country: 'United States' },
+  { city: 'New Orleans', state: 'Louisiana', country: 'United States' },
+  { city: 'Denver', state: 'Colorado', country: 'United States' },
+  { city: 'Los Angeles', state: 'California', country: 'United States' },
 ];
 
 const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
