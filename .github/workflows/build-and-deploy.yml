@@ -64,7 +64,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Type check frontend
         working-directory: frontend
@@ -140,7 +140,7 @@ jobs:
           docker-compose up --build -d
           
           echo "⏳ Waiting for services to be healthy..."
-          sleep 10
+          sleep 5
           
           echo "✅ PR Deployment complete!"
           docker-compose ps
