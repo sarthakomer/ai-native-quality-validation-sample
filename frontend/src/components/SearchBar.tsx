@@ -15,7 +15,6 @@ const LOCATIONS = [
   { city: 'Malibu', state: 'California', country: 'United States' },
   { city: 'Brooklyn', state: 'New York', country: 'United States' },
   { city: 'Austin', state: 'Texas', country: 'United States' },
-  { city: 'Aspen', state: 'Colorado', country: 'United States' },
   { city: 'Miami Beach', state: 'Florida', country: 'United States' },
   { city: 'San Francisco', state: 'California', country: 'United States' },
   { city: 'Honolulu', state: 'Hawaii', country: 'United States' },
