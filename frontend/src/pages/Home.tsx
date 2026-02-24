@@ -7,7 +7,7 @@ import type { Listing, SearchFilters } from '../types';
 
 const categories = [
   { name: 'All', icon: '🌍', filter: {} },
-  { name: 'Beachfront', icon: '🌊', filter: { amenities: 'Beach Access' } },
+  { name: 'Beachfront', icon: '🌊', filter: { amenities: ['Beach Access'] } },
   { name: 'Cabins', icon: '🪵', filter: { propertyType: 'Cabin' } },
   { name: 'Villas', icon: '🏛️', filter: { propertyType: 'Villa' } },
   { name: 'Apartments', icon: '🏙️', filter: { propertyType: 'Apartment' } },
