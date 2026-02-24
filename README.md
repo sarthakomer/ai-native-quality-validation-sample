@@ -1,4 +1,22 @@
 
+# 🔧 Setup for GitHub App Quick Start with Your Own Fork
+
+To use this repository with the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud), follow these steps:
+
+1. **Fork the repository** — Click **Fork** to create a copy under your GitHub account.
+2. **Install the GitHub App** — Install the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud) on your forked repository.
+3. **Configure credentials** — Add the `.lambdatest/config.yaml` file with your LambdaTest project ID, folder ID, and other configuration values. See the [configuration guide](https://www.testmuai.com/support/docs/github-app-integration/#repository-configuration) for details.
+4. **Enable GitHub Actions** — Go to the **Actions** tab in your forked repository and enable workflows.
+5. **Enable GitHub Pages** — Go to **Settings → Pages** and set the branch to **gh-pages** with root directory.
+6. **Raise a PR against your own fork** — Create a feature branch in your fork, make changes, and open a pull request **targeting your fork's `main` branch** (not the upstream repository).
+7. **Trigger the workflow** — Comment `@KaneAI Validate this PR` on your pull request.
+
+> **Note**: Pull requests to the upstream (LambdaTest) repository from non-authorized users will be automatically closed. Preview deployments and KaneAI validation are only available on PRs raised against your own fork.
+
+For detailed documentation, visit the [LambdaTest Cloud GitHub App Integration Guide](https://www.testmuai.com/support/docs/github-app-integration/).
+
+
+
 # Airbnb Clone - Full Stack Application
 
 A modern, full-stack Airbnb clone built with React, TypeScript, Node.js, and Express. This project demonstrates a complete vacation rental platform with property listings, search functionality, user authentication, and booking management.
@@ -89,22 +107,6 @@ The application includes 46 diverse properties across the United States:
 - All properties feature unique images, detailed descriptions, and authentic amenities
 
 
-
-# 🔧 Setup for GitHub App Quick Start with Your Own Fork
-
-To use this repository with the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud), follow these steps:
-
-1. **Fork the repository** — Click **Fork** to create a copy under your GitHub account.
-2. **Install the GitHub App** — Install the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud) on your forked repository.
-3. **Configure credentials** — Add the `.lambdatest/config.yaml` file with your LambdaTest project ID, folder ID, and other configuration values. See the [configuration guide](https://www.testmuai.com/support/docs/github-app-integration/#repository-configuration) for details.
-4. **Enable GitHub Actions** — Go to the **Actions** tab in your forked repository and enable workflows.
-5. **Enable GitHub Pages** — Go to **Settings → Pages** and set the branch to **gh-pages** with root directory.
-6. **Raise a PR against your own fork** — Create a feature branch in your fork, make changes, and open a pull request **targeting your fork's `main` branch** (not the upstream repository).
-7. **Trigger the workflow** — Comment `@KaneAI Validate this PR` on your pull request.
-
-> **Note**: Pull requests to the upstream (LambdaTest) repository from non-authorized users will be automatically closed. Preview deployments and KaneAI validation are only available on PRs raised against your own fork.
-
-For detailed documentation, visit the [LambdaTest Cloud GitHub App Integration Guide](https://www.testmuai.com/support/docs/github-app-integration/).
 
 
 
