@@ -7,10 +7,6 @@ on:
     types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
-env:
-  # Comma-separated list of GitHub usernames allowed to trigger PR preview deployments
-  ALLOWED_PR_AUTHORS: 'sandeepyadav-lt'
-
 permissions:
   contents: write
   pull-requests: write
@@ -22,7 +18,8 @@ concurrency:
 jobs:
   check-author:
     name: Check PR author
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    # Only enforce author check on the upstream repo; forks allow all authors
+    if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.repository_owner == 'LambdaTest'
     runs-on: ubuntu-latest
     outputs:
       allowed: ${{ steps.check.outputs.allowed }}
@@ -31,7 +28,9 @@ jobs:
         id: check
         run: |
           AUTHOR="${{ github.event.pull_request.user.login }}"
-          IFS=',' read -ra USERS <<< "$ALLOWED_PR_AUTHORS"
+          # Set via GitHub repo variable: Settings → Secrets and variables → Actions → Variables
+          ALLOWED="${{ vars.ALLOWED_PR_AUTHORS }}"
+          IFS=',' read -ra USERS <<< "$ALLOWED"
           for user in "${USERS[@]}"; do
             user="$(echo "$user" | xargs)"
             if [ "$user" = "$AUTHOR" ]; then
