@@ -128,7 +128,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build
-    if: github.event.action != 'closed'
+    if: always() && needs.build.result == 'success' && github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout gh-pages branch
