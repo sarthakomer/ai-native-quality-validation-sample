@@ -137,10 +137,11 @@ const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
                 setShowGuestPicker(false);
               }}
             >
-              <label className="block text-xs font-semibold text-gray-900 mb-1">
+              <label htmlFor="search-location" className="block text-xs font-semibold text-gray-900 mb-1">
                 Where
               </label>
               <input
+                id="search-location"
                 type="text"
                 placeholder="Search destinations"
                 value={location}
